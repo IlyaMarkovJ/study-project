@@ -124,11 +124,11 @@ class UserControllerTest {
 
         assertEquals(createResponse.id, updateBalanceResponse.id);
         assertEquals(createResponse.login, updateBalanceResponse.login);
-        assertNotEquals(createResponse.amount, updateBalanceResponse.amount);
         assertEquals(createResponse.creationDate, updateBalanceResponse.creationDate);
-
         assertEquals(createResponse.name, updateBalanceResponse.name);
         assertEquals(createResponse.lastName, updateBalanceResponse.lastName);
+
+        assertNotEquals(createResponse.amount, updateBalanceResponse.amount);
     }
 
     @Test
