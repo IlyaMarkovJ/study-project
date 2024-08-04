@@ -86,9 +86,7 @@ public class UserService {
 
     public UserResponse updateBalance(long id, double amount) {
         User userEntity = userStorage.get(id);
-
-        double balance = userEntity.getAmount();
-        userEntity.setAmount(balance + amount);
+        userEntity.amount = userEntity.amount + amount;
 
         userStorage.put(userEntity.id, userEntity);
 
