@@ -7,6 +7,8 @@ import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
@@ -14,9 +16,19 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @GetMapping
+    public List<UserResponse> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
     @GetMapping("{id}")
-    public UserResponse gerUser(@PathVariable("id") long id) {
+    public UserResponse getUser(@PathVariable("id") String id) {
         return userService.getUser(id);
+    }
+
+    @GetMapping("counter")
+    public int userCounter() {
+        return userService.userCounter();
     }
 
     @PostMapping
@@ -24,18 +36,19 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @PutMapping("{id}")
-    public UserResponse updateUser(@PathVariable("id") long id, @RequestBody UserUpdateRequest user) {
-        return userService.updateUser(id, user);
-    }
-
     @PostMapping("{id}/up-balance/{amount}")
-    public UserResponse updateBalance(@PathVariable("id") long id, @PathVariable("amount") double amount) {
+    public UserResponse updateBalance(@PathVariable("id") String id, @PathVariable("amount") double amount) {
         return userService.updateBalance(id, amount);
     }
 
+    @PutMapping("{id}")
+    public UserResponse updateUser(@PathVariable("id") String id, @RequestBody UserUpdateRequest user) {
+        return userService.updateUser(id, user);
+    }
+
+
     @DeleteMapping("{id}")
-    public void deleteUser(@PathVariable("id") long id) {
+    public void deleteUser(@PathVariable("id") String id) {
         userService.deleteUser(id);
     }
 }
