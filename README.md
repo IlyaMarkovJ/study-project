@@ -21,7 +21,7 @@ docker exec -it sql-postgres-study bash
 psql -U postgres
 ```
 
-```postgres-sql
+```sql
 CREATE DATABASE postgres_study;
 \c postgres_study
 CREATE ROLE postgres_study WITH LOGIN PASSWORD 'password';
@@ -40,7 +40,7 @@ from example;
 
 ### Useful commands
 
-```postgres-sql
+```sql
 ALTER TABLE postgres_study.example ADD "name" varchar NULL;
 
 ALTER TABLE postgres_study.example ADD surname varchar NULL;

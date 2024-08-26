@@ -1,16 +1,8 @@
 package org.example.repository;
 
 import org.example.entity.User;
-import org.springframework.stereotype.Service;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
-@Service
-public class UserRepository {
-
-    public User findUser(String id) {
-
-    }
-
-    public void saveUser(User userEntity) {
-
-    }
+public interface UserRepository extends ListCrudRepository<User, String> {
 }

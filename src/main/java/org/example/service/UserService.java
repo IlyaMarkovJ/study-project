@@ -22,27 +22,21 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    Map<String, User> userStorage = new HashMap<>();
-
     public List<UserResponse> getAllUsers() {
-        return userStorage.values().stream()
-                .map(userEntity -> convertUser(userEntity))
+        return userRepository.findAll().stream()
+                .map(userEntities -> convertUser(userEntities))
                 .collect(Collectors.toList());
     }
 
     public UserResponse getUser(String id) {
-        // User userEntity = userStorage.get(id);
-        User userEntity = userRepository.findUser(id);
-
-        if (userEntity == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+        User userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         return convertUser(userEntity);
     }
 
-    public int userCounter() {
-        return userStorage.size();
+    public long userCounter() {
+        return userRepository.count();
     }
 
     public UserResponse createUser(UserCreateRequest user) {
@@ -57,43 +51,35 @@ public class UserService {
 
         userEntity.creationDate = LocalDateTime.now();
 
-        // userStorage.put(userEntity.id, userEntity);
-
-        userRepository.saveUser(userEntity);
+        userRepository.save(userEntity);
 
         return convertUser(userEntity);
     }
 
     public UserResponse updateBalance(String id, double amount) {
-        User userEntity = userStorage.get(id);
-
-        if (userEntity == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+        User userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         userEntity.amount = userEntity.amount + amount;
 
-        userStorage.put(userEntity.id, userEntity);
+        userRepository.save(userEntity);
 
         return convertUser(userEntity);
     }
 
     public UserResponse updateUser(String id, UserUpdateRequest user) {
-        User userEntity = userStorage.get(id);
-
-        if (userEntity == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+        User userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         userEntity.name = user.name;
         userEntity.lastName = user.lastName;
 
-        userStorage.put(userEntity.id, userEntity);
+        userRepository.save(userEntity);
 
         return convertUser(userEntity);
     }
 
     public void deleteUser(String id) {
-        userStorage.remove(id);
+        userRepository.deleteById(id);
     }
 }

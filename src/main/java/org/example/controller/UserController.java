@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("counter")
-    public int userCounter() {
+    public long userCounter() {
         return userService.userCounter();
     }
 
