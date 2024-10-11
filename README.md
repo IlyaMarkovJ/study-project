@@ -1,5 +1,59 @@
 # study-project
 
+## Usage
+
+*Get all users*
+
+```shell
+curl --location 'localhost:8080/api/v1/users'
+```
+
+*Get user*
+
+```shell
+curl --location 'localhost:8080/api/v1/users/{id}'
+```
+
+*User counter*
+
+```shell
+curl --location 'localhost:8080/api/v1/users/counter'
+```
+
+*Create user*
+
+```shell
+curl --location 'localhost:8080/api/v1/users' \
+--data '{
+    "login": "test",
+    "name": "testName",
+    "lastName": "testLastName",
+    "amount": 20.0
+}'
+```
+*Update balance*
+
+```shell
+curl --location --request POST 'localhost:8080/api/v1/users/{id}/up-balance/20.0'
+```
+
+*Update user*
+
+```shell
+curl --location --request PUT 'localhost:8080/api/v1/users/{id} \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "test2",
+    "lastName": "lastName2"
+}'
+```
+
+*Delete user*
+
+```shell
+curl --location --request DELETE 'localhost:8080/api/v1/users/{id}'
+```
+
 ## Start database
 
 ### Download Docker

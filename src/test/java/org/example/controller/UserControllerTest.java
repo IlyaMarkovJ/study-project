@@ -65,41 +65,6 @@ class UserControllerTest {
     }
 
     @Test
-    void userCounterTest() {
-//        // create users
-//        // user 1
-//        UserCreateRequest createRequest1 = new UserCreateRequest();
-//        createRequest1.login = "testLoginGetAllUsers1";
-//        createRequest1.name = "testNameGetAllUsers1";
-//        createRequest1.lastName = "testLastNameGetAllUsers1";
-//        createRequest1.amount = 0.0;
-//
-//        UserResponse createResponse1 = createAndCheckUser(createRequest1);
-//
-//        // user 2
-//        UserCreateRequest createRequest2 = new UserCreateRequest();
-//        createRequest2.login = "testLoginGetAllUsers2";
-//        createRequest2.name = "testNameGetAllUsers2";
-//        createRequest2.lastName = "testLastNameGetAllUsers2";
-//        createRequest2.amount = 0.0;
-//
-//        UserResponse createResponse2 = createAndCheckUser(createRequest2);
-//
-//        // get user counter
-//        Map<String , UserResponse> userStorage = new HashMap<>();
-//        userStorage.put(createResponse1.id, createResponse1);
-//        userStorage.put(createResponse2.id, createResponse2);
-//        UserResponse getUserCounter = webTestClient.get()
-//                .uri("/api/v1/users/counter")
-//                .exchange()
-//                .expectStatus().isOk()
-//                .returnResult(UserResponse.class)
-//                .getResponseBody()
-//                .blockFirst();
-
-    }
-
-    @Test
     void createUserTest() {
         createAndCheckUser();
     }

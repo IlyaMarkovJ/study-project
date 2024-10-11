@@ -26,11 +26,6 @@ public class UserController {
         return userService.getUser(id);
     }
 
-    @GetMapping("counter")
-    public long userCounter() {
-        return userService.userCounter();
-    }
-
     @PostMapping
     public UserResponse createUser(@RequestBody UserCreateRequest user) {
         return userService.createUser(user);

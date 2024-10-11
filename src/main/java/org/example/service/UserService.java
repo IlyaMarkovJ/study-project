@@ -35,10 +35,6 @@ public class UserService {
         return convertUser(userEntity);
     }
 
-    public long userCounter() {
-        return userRepository.count();
-    }
-
     public UserResponse createUser(UserCreateRequest user) {
         User userEntity = new User();
 
