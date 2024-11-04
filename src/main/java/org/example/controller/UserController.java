@@ -3,8 +3,11 @@ package org.example.controller;
 import org.example.controller.dto.UserCreateRequest;
 import org.example.controller.dto.UserResponse;
 import org.example.controller.dto.UserUpdateRequest;
+import org.example.service.TransferService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +18,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    TransferService transferService;
 
     @GetMapping
     public List<UserResponse> getAllUsers() {
@@ -34,6 +39,18 @@ public class UserController {
     @PostMapping("{id}/up-balance/{amount}")
     public UserResponse updateBalance(@PathVariable("id") String id, @PathVariable("amount") double amount) {
         return userService.updateBalance(id, amount);
+    }
+
+    @PostMapping("transfer/{from}/{to}/{amount}")
+    public ResponseEntity<UserResponse> transfer(@PathVariable("from") String from,
+                                                 @PathVariable("to") String to,
+                                                 @PathVariable("amount") double amount) {
+        try {
+            transferService.transfer(from, to, amount);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("{id}")
